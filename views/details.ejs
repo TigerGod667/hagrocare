@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel = "stylesheet" href="css/main.css">
+	<script src="js/angular.min.js"></script>
+	<title>HAGROCARE |information</title>
+</head>
+<body ng-app = "myApp">
+	<div class="details" ng-controller="my-controller">
+		<div class="side-cart">
+			<span ng-click = "vanish()">&times;</span>
+			<h1 style="background: #414141; text-align: center; height:80px; padding-top: 17px; color: white;font-family: Bahnschrift; ">CART</h1>
+			<!-- <div class = "side-item"  ng-repeat = "i in table"> 	<img src="{{i['src']}}">
+				<div class = "side-content">
+					<h1>{{i["crop_name"]}}</h1>
+					<p>{{i["cost"]}}</p>
+					<h2>{{i["quantity"]}} kg</h2>
+				</div>
+			</div> -->
+			<button style = "margin: 50px 40px 30px 40px" class = "button">VIEW CART</button>
+		</div>
+		<div class="details-top">
+			<nav id="navbar" class = "navbars">
+				<ul class = "navlist">
+					<img src="images/hagro.png" width="240" height="70">
+					<li><a class = "temp" href = "#" style="color:#ffaa41;">PRODUCTS</a></li>
+					<li><a href="#">FAVOURITES</a></li>
+					<li><a href="login.html">LOGOUT</a></li>
+					<li><img class = "cart" ng-click = "appear()" src="images/cart.png"></li>
+				</ul>
+			</nav>
+		</div>
+		<div class = "details-content">
+			<div class = "detail-item">
+				<img src="http://localhost:3000/uploaded images/<%= result[0].image %>">
+				<div style="margin-bottom: 150px;">
+					<h1 style="margin:0; padding:0"><%= result[0].crop_name%></h1>
+					<p style="color:grey; font-size:20px"><%= result[0].quantity %> Kg</p>
+					<h2> ₹<%= result[0].cost %></h2>
+					<form action="/placeOrder" method="POST">
+						<input type="hidden" name = "inputer" value = "<%= result[0].crop_id %>">
+						<input type="hidden" name = "quantity" value = "<%= quantity %>">
+						<button style="top:20px" class = "button">PLACE ORDER</button>
+					</form>
+				</div>
+			</div>
+			<div class = "detail-description">
+				<h1>PRODUCT DESCRIPTION</h1>
+				<p style="color:grey">
+					<!-- I'm a product detail. I'm a great place to add more information about your product such as sizing, material, care and cleaning instructions. This is also a great space to write what makes this product special and how your customers can benefit from this item. Buyers like to know what they’re getting before they purchase, so give them as much information as possible so they can buy with confidence and certainty. -->
+					<%= result[0].description %>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div ng-include="'footer'"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src = "js/details.js"></script>
+<script type="text/javascript" src = "js/index.js"></script>
+</body>
+</html>
+
+<!-- INSERT INTO crops(crop_name, fertilizer, soil, disease, date_sown, crop_type, user_id) VALUES ("cabbage", "nitrogen", "loamy soil","egrot", "2002-03-04", "kharif", 2); -->

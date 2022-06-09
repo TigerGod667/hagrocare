@@ -1,0 +1,163 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel = "stylesheet" href="css/main.css">
+	<script src="js/angular.min.js"></script>
+	<title>HAGROCARE |information</title>
+</head>
+<body ng-app = "myApp" id="main" style="overflow:hidden">
+	<div ng-controller = "my-controller" class="table-div">
+		<nav id="navbar" class = "navbars">
+			<ul class = "navlist">
+				<img src="images/hagro.png" width="240" height="70">
+				<li class="dropdown">
+					<button class="dropbtn"><b>TRAINING</b> 
+					  <i class="fa fa-caret-down"></i>
+					</button>
+					<div class="dropdown-content">
+					  <a href="" ng-click = "appear('train-form')">ADD</a>
+					  <a href="training">VIEW</a>
+					</div>
+				</li>
+				<li><a href="farmer">PRODUCTS</a></li>
+				<li><a href="logout">LOGOUT</a></li>
+			</ul>
+		</nav>
+		<div style="padding-bottom: 20px;">
+		<div style="position: absolute; top:150px; left:250px">
+			<input type="text" placeholder="Enter Date" class="crop-input" ng-model = "date">
+		</div>
+		</div>
+        <div class="train-form animate">
+			<form method = "POST", action = "/train" enctype="multipart/form-data">
+				<fieldset class = "form-group">
+					<legend class = "border-bottom mb4" id="heading-register" style="color:white">Venue Details<span ng-click = "disappear('train-form')" class = "close-button" style="left: 160px">&times;</span></legend>
+					<div class = "form-group">
+						<label class = "form-control-label">Organisation Name</label>
+						<input class = "form-control form-control-lg"type="text" name="org_name" required>
+					</div>
+					<div class = "form-group">
+						<label class = "form-control-label">Date</label>
+						<input class = "form-control form-control-lg" type="date" name="date" id="date1" onchange="dateOnChange()" required>
+					</div>
+					<div class = "form-group">
+						<label class = "form-control-label">Time</label>
+						<input class = "form-control form-control-lg" type="time" name="time" id="time1" required>
+					</div>
+					<div class = "form-group">
+						<label class = "form-control-label">Venue</label>
+						<input class = "form-control form-control-lg"type="text" name="venue" required>
+					</div>
+					<div class = "form-group">
+						<label class = "form-control-label">Contact</label>
+						<input class = "form-control form-control-lg"type="text" name="contact" required>
+					</div>
+					<div>
+						<button class="button" style="top:15px" name="table-submit">
+							Send
+						</button>
+					</div>
+				</fieldset> 
+			</form>
+		</div>
+		
+		<div class="table-content">
+				<table>
+						<tr>
+							<th ng-click = "order('org_name')">
+								ORGANISATION
+							</th>
+							<th ng-click = "order('date')">
+								DATE
+							</th>
+							<th ng-click = "order('time')">
+								TIME
+							</th>
+                            <th ng-click = "order('venue')">
+								VENUE
+							</th>
+                            <th ng-click = "order('contact')">
+								CONTACT
+							</th>
+							<th colspan="2">
+								OPTIONS
+							</th>
+						</tr>
+						<tr ng-repeat = "detail in table | filter:{date:date} | orderBy: orderby">
+								<td>{{detail.org_name}}</td>
+								<td>{{detail.date}}</td>
+								<td>{{detail.time}}</td>
+                                <td>{{detail.venue}}</td> 
+                                <td>{{detail.contact}}</td>
+								<td><img src="images/edit.png"></td>
+								<td ng-click = "deleteCrop($event)" id="delete:${{detail.t_id}}$"><img src="images/delete.png"></td>
+						</tr>
+				</table>
+		</div>
+	</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+	var today = new Date();
+	var day = today.getDate();
+	if (day<10) day = "0"+day.toString();
+	var month = today.getMonth()+1;
+	if (month<10) month = "0"+month.toString();
+	var date = today.getFullYear()+'-'+month+'-'+day;
+	// console.log(date);
+	document.getElementById("date1").setAttribute("min",date);
+	function dateOnChange() {
+		var date2 = document.getElementById("date1").value;
+		console.log(date1+" "+date2);
+		if (date2==date) {
+			var hours = today.getHours();
+			if (hours<10) hours = "0"+hours.toString();
+			var minutes = today.getMinutes();
+			if (minutes<10) minutes = "0"+minutes.toString();
+			var time = hours+':'+minutes;
+			document.getElementById("time1").setAttribute("min",time);
+		}
+		else {
+			document.getElementById("time1").setAttribute("min","00:00");
+		}
+	}
+	let app = angular.module("myApp", []);
+app.controller("my-controller", function($scope){
+	$scope.table = JSON.parse('<%- JSON.stringify(result) %>');
+	$scope.appear = function(c){
+		let form = document.querySelector("." + c);
+		form.style.display = "block"; 	
+	}
+	$scope.disappear = function(c){
+		let form = document.querySelector("." + c);
+		form.style.display = "none"; 	
+	}
+	$scope.order = function(a){
+		$scope.orderby = a;
+	}
+	$scope.deleteCrop = ($event) => {
+		let col = $event.currentTarget;
+		console.log(col.id);
+		let row = col.parentNode
+		row.remove();
+		let post = async () => {
+			const options = {
+				method: 'POST',
+				body: col.id,
+				headers: {
+					// "Content-Type": "application/json"
+					"Content-Type": "application/x-www-form-urlencoded"
+				}
+			}
+			let res = await fetch('http://localhost:3000/trainDelete', options);		
+			console.log("hii: " + res.text);
+		}
+		post();
+	}
+	console.log($scope.table);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel = "stylesheet" href="css/main.css">
+	<script src="js/angular.min.js"></script>
+	<title>HAGROCARE |information</title>
+</head>
+<body ng-app = "myApp" id="main" style="overflow:hidden">
+	<!-- <% if (typeof session != "undefined") { %>
+	<p><%= session.user_id %></p>
+	<% } %> -->
+	<div ng-controller = "my-controller" class="table-div">
+		<nav id="navbar" class = "navbars">
+			<ul class = "navlist">
+				<img src="images/hagro.png" width="240" height="70">
+				<!-- <li><a href="train">VIEW TRAINING</a></li>
+				<li><a href = "" ng-click = "appear('train-form')">TRAINING</a></li> -->
+				<li class="dropdown">
+					<button class="dropbtn"><b>TRAINING</b> 
+					  <i class="fa fa-caret-down"></i>
+					</button>
+					<div class="dropdown-content">
+					  <a href="" ng-click = "appear('train-form')">ADD</a>
+					  <a href="training">VIEW</a>
+					</div>
+				</li>
+				<li><a href="farmer" style="color:#ffaa41">PRODUCTS</a></li>
+				<li><a href="logout">LOGOUT</a></li>
+			</ul>
+		</nav>
+		<div style="padding-bottom: 20px;">
+		<button ng-click="appear('table-form')" class="button" id = "add-button" style="position:relative;top:140px;left:1160px">ADD</button>
+		<div style="position: absolute; top:150px; left:250px">
+			<input type="text" placeholder="Enter Crop Name" class="crop-input" ng-model = "crop">
+		</div>
+		</div>
+		<div class="table-form animate">
+			<form method = "POST", action = "/farmer" enctype="multipart/form-data">
+				<fieldset class = "form-group">
+					<legend class = "border-bottom mb4" id="heading-register" style="color:white">Enter Details<span ng-click = "disappear('table-form')" class = "close-button">&times;</span></legend>
+					<div class = "form-group">
+						<label class = "form-control-label">Crop Name</label>
+						<input class = "form-control form-control-lg"type="text" name="crop_name" required>
+					</div>
+					<div class = "form-group">
+						<label class = "form-control-label">Qunatity</label>
+						<input class = "form-control form-control-lg"type="text" name="quantity" required>
+					</div>
+					<div class = "form-group">
+						<label class = "form-control-label">Cost</label>
+						<input class = "form-control form-control-lg"type="text" name="cost" required>
+					</div>
+					<div class = "form-group">
+						<label class = "form-control-label">Product description</label><br>
+						<textarea name = "description" style="height:200px;padding:0; margin:0;width:400px;background-color: rgba(255, 255, 255, 0.15);; border: 1px solid white;border-radius: 8px;color: white;">
+						</textarea>
+					</div>
+					<div class = "form-group">
+						<input 	type="file" id="myFile" name="image" accept=""/>
+					</div>
+					<!-- <button style="border: none;color:black;font-size:12px">
+						Upload image
+					</button> -->
+					<div>
+						<button class="button" style="top:15px" name="table-submit">
+							Submit
+						</button>
+					</div>
+				</fieldset> 
+			</form>
+		</div>
+		<div class="train-form animate">
+			<form method = "POST", action = "/train" enctype="multipart/form-data">
+				<fieldset class = "form-group">
+					<legend class = "border-bottom mb4" id="heading-register" style="color:white">Venue Details<span ng-click = "disappear('train-form')" class = "close-button" style="left: 160px">&times;</span></legend>
+					<div class = "form-group">
+						<label class = "form-control-label">Organisation Name</label>
+						<input class = "form-control form-control-lg"type="text" name="org_name" required>
+					</div>
+					<div class = "form-group">
+						<label class = "form-control-label">Date</label>
+						<input class = "form-control form-control-lg" type="date" name="date" id="date1" onchange="dateOnChange()" required>
+					</div>
+					<div class = "form-group">
+						<label class = "form-control-label">Time</label>
+						<input class = "form-control form-control-lg" type="time" name="time" id="time1" required>
+					</div>
+					<div class = "form-group">
+						<label class = "form-control-label">Venue</label>
+						<input class = "form-control form-control-lg"type="text" name="venue" required>
+					</div>
+					<div class = "form-group">
+						<label class = "form-control-label">Contact</label>
+						<input class = "form-control form-control-lg"type="text" name="contact" required>
+					</div>
+					<div>
+						<button class="button" style="top:15px" name="table-submit">
+							Send
+						</button>
+					</div>
+				</fieldset> 
+			</form>
+		</div>
+		<div class="table-content">
+				<table>
+						<tr>
+							<th>
+								IMAGE
+							</th>
+							<th ng-click = "order('crop_name')">
+								CROP NAME	
+							</th>
+							<th ng-click = "order('quantity')">
+								QUANTITY(kg)
+							</th>
+							<th ng-click = "order('cost')">
+								COST
+							</th>
+							<th colspan="2">
+								OPTIONS
+							</th>
+						</tr>
+						<tr ng-repeat = "detail in table | filter:{crop_name:crop} | orderBy: orderby">
+								<td><img src = "http://localhost:3000/uploaded images/{{detail['image']}}" class = "image"></td>
+								<td>{{detail.crop_name}}</td>
+								<td>{{detail.quantity}}</td>
+								<td>{{detail.cost}}</td> 
+								<td><img src="images/edit.png"></td>
+								<td ng-click = "deleteCrop($event)" id="delete:${{detail.crop_id}}$"><img src="images/delete.png"></td>
+						</tr>
+				</table>
+		</div>
+	</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+	var today = new Date();
+	var day = today.getDate();
+	if (day<10) day = "0"+day.toString();
+	var month = today.getMonth()+1;
+	if (month<10) month = "0"+month.toString();
+	var date = today.getFullYear()+'-'+month+'-'+day;
+	// console.log(date);
+	document.getElementById("date1").setAttribute("min",date);
+	function dateOnChange() {
+		var date2 = document.getElementById("date1").value;
+		console.log(date1+" "+date2);
+		if (date2==date) {
+			var hours = today.getHours();
+			if (hours<10) hours = "0"+hours.toString();
+			var minutes = today.getMinutes();
+			if (minutes<10) minutes = "0"+minutes.toString();
+			var time = hours+':'+minutes;
+			document.getElementById("time1").setAttribute("min",time);
+		}
+		else {
+			document.getElementById("time1").setAttribute("min","00:00");
+		}
+	}
+	// alert(document.getElementById("date1").getAttribute("min"));
+	// console.log(document.getElementById("date1").getAttribute("min"));
+	let app = angular.module("myApp", []);
+	app.controller("my-controller", function($scope){
+	$scope.table = JSON.parse('<%- JSON.stringify(result) %>');
+	$scope.appear = function(c){
+		let form = document.querySelector("." + c);
+		form.style.display = "block"; 	
+	}
+	$scope.disappear = function(c){
+		let form = document.querySelector("." + c);
+		form.style.display = "none"; 	
+	}
+	$scope.order = function(a){
+		$scope.orderby = a;
+	}
+	$scope.deleteCrop = ($event) => {
+		let col = $event.currentTarget;
+		console.log(col.id);
+		let row = col.parentNode
+		row.remove();
+		let post = async () => {
+			const options = {
+				method: 'POST',
+				body: col.id,
+				headers: {
+					"Content-Type": "application/x-www-form-urlencoded"
+				}
+			}
+			let res = await fetch('http://localhost:3000/farmerEnd', options);		
+			console.log("hii: " + res.text);
+		}
+		post();
+	}
+	console.log($scope.table);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel = "stylesheet" href="css/main.css">
+	<title>HAGROCARE |Login</title>
+</head>
+<body>
+	<div class="registration">
+		<nav id="navbar" class = "navbars">
+			<ul class = "navlist">
+				<img src="images/hagro.png" width="240" height="70">
+				<li><a href="home">HOME</a></li>
+				<li><a href="about">ABOUT</a></li>
+				<li><a href="aboutustamil">பற்றி</a></li>
+				<li><a href="services">SERVICES</a></li>
+				<li><a href="contact">CONTACT</a></li>
+				<li><a href="login" style="color:#ffaa41">LOGIN</a></li>
+			</ul>
+		</nav>
+		<div class="login-div">
+			<div class="login-form">
+				<form method = "POST" action="/login">
+					<fieldset class = "form-group">
+						<legend class = "border-bottom mb4" id="heading-register">Sign in</legend>
+						<div class = "form-group">
+							<label class="form-control-label">Email</label>
+							<input class="form-control form-control-lg" type="text" name="email" required>
+							<% if(typeof alert != 'undefined') { %>
+								<% alert.forEach(function(error) { %>
+									<% if (error.param === "email"){ %>
+										<p class = "text-danger" ><%= error.msg %></p>
+									<% } %>
+								<% }); %>
+							<% } %>
+						</div>
+						<div class = "form-group">
+							<label class="form-control-label">Password</label>
+							<input class="form-control form-control-lg" type="password" name="password" required>
+							<% if(typeof alert != 'undefined') { %>
+								<% alert.forEach(function(error) { %>
+									<% if (error.param === "password"){ %>
+										<p class = "text-danger" ><%= error.msg %></p>
+									<% } %>
+								<% }); %>
+							<% } %>
+						</div>
+								<% if (typeof alerter != 'undefined') { %>
+									<center><p style="color:red;"><%= alerter %></p></center>
+								<% } %>
+						<button class="login-button" name=login-submit>
+							Login
+						</button>
+						<small class="muted-register" style="color:grey;float:right;margin-top:30px">
+							Don't have an account<a class = "ml-2" href = "/registration">register</a>
+						</small>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src = "js/login.js"></script>
+</body>
+</html>

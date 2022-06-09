@@ -1,0 +1,40 @@
+<!DOCtype HTML>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script type="text/javascript" src = "js/angular.min.js"></script>
+        <title>Contact us</title>
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+<body ng-app = "" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)), url('images/contact.jpg');background-size: cover;height:100vh">
+        <nav id="navbar" class = "navbars" style="top:0">
+                <ul class = "navlist">
+                    <img src="images/hagro.png" width="240" height="70">
+                    <li><a href="home">HOME</a></li>
+                    <li><a href="about">ABOUT</a></li>
+                    <li><a href="aboutustamil">பற்றி</a></li>
+                    <li><a href="services">SERVICES</a></li>
+                    <li><a href="contact" style="color:#ffaa41">CONTACT</a></li>
+                    <li><a href="login">LOGIN</a></li>
+                </ul>
+        </nav>
+    <div class="BG">
+        <b><h1 style="color:white; position: relative; bottom:100px">CONTACT US</h1></b>
+    </div>
+        <div class="contactform">
+            <form action="/contactEnd" method = "POST">
+                <br>
+                <label for="name"></label><br>
+                <input class="txtbr" type="text" id="name" name="name" placeholder="Name" required><br><br>
+                <label for="email"></label>
+                <input class="txtbr" type="text" id="email" name="email" placeholder="Email" required><br><br>
+                <label for="subject"></label>
+                <textarea class="txtbr" id="subject" name="subject" placeholder="Write your query" style="height: 150px;" required></textarea><br><br>
+                <input type="Submit" class="button" value="Submit">    
+            </form>
+        </div>
+        <div ng-include = "'footer'" style="margin-top:140px"></div>
+    <script type="text/javascript" src = "js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>HAGROCARE |About page</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<!-- socia-media icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-app = "myApp" style="background-color: #eff2f5;">
+	<div class="about">	
+		<div class = "about-top">
+			<nav id="navbar" class = "navbars">
+				<ul class = "navlist">
+					<img src="images/hagro.png" width="240" height="70">
+					<li><a href="home">HOME</a></li>
+					<li><a href="about" style="color:#ffaa41">ABOUT</a></li>
+					<li><a href="aboutustamil">பற்றி</a></li>
+					<li><a href="services">SERVICES</a></li>
+					<li><a href="contact">CONTACT</a></li>
+					<li><a href="login">LOGIN</a></li>
+				</ul>
+			</nav>
+			<div style="position: absolute;top: 200px;left: 120px;line-height: 5px;">
+				<h1>LEARN GROW CONNECT</h1>
+				<h3>About us</h3>
+				<p>we help in promoting Traditional Farming</p>	
+			</div>
+		</div>
+		<div class="about-content">
+			<div style="width:600px;">
+				<img class = "aboutus-icon" src="images/aboutustopic.png">
+				<h3>WHO WE ARE</h3>
+				<head-content></head-content>
+				<!-- <h4>
+				We are helping farmers for growth and development
+				</h4> -->
+				<p style="color: #666666;font-size: 19px;line-height: 30px;font-size:20px">
+					<app-content></app-content>
+					<!-- We provide leading solutions to agriculture sector problems, always committed to meeting the needs and expectations. Hagrocare is helping farmers to emerging markets maximize their profits and provide a new way of trading agricultural products by cut-loosing the middle interfaces between farmer and the consumer. -->
+				</p>	
+			</div>
+			<img class = "women-image" src="images/trad1.jpg">
+			<img class = "corner-image" src="images/aboutcornerimage.png">
+			<button class = "button" style="position: reltaive;top: 30px"> 
+				<a href = "aboutdetails" style="text-decoration: none; color:#ffaa41 ">SEE MORE
+			</button>
+		</div>
+	</div>
+	<div style="margin-top:300px;" ng-include = "'footer'"></div>
+	<script src="js/index.js"></script>
+	<script src="js/about.js"></script>
+</body>
+</html>

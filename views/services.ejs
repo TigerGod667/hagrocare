@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>HAGROCARE |Services page</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<!-- socia-media icons -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-app = "myApp" style="background-color: #eff2f5;">
+	<div class="services">	
+		<div class = "about-top">
+				<nav id="navbar" class = "navbars">
+					<ul class = "navlist">
+						<img src="images/hagro.png" width="240" height="70">
+						<li><a href="home">HOME</a></li>
+						<li><a href="about">ABOUT</a></li>
+						<li><a href="aboutustamil">பற்றி</a></li>
+						<li><a href="services" style="color:#ffaa41">SERVICES</a></li>
+						<li><a href="contact">CONTACT</a></li>
+						<li><a href="login">LOGIN</a></li>
+					</ul>
+				</nav>
+			<div style="position: absolute;top: 200px;left: 120px;line-height: 5px;">
+				<h1>WHAT WE DO</h1>
+				<h3>Services</h3>
+				<p>we provide for agriculture sector</p>	
+			</div>
+		</div>
+		<div class="sevices-content">
+			<div class="weather">
+				<div class="weather-content">
+					<h1><span><img src="images/points.png"> </span>       
+					Information Provider</h1>
+					<p>
+						Major of the people dont know about the traditional farming methods which is a more natural form of farming and fetilizers free. So the products from this type of farming will be natural. So it is essential for people to know about the traditional farming practices and this feature helps the people in doing this.
+					</p>
+				<button class="explore-button" style="margin-top:40px">
+					Explore now
+				</button>
+				</div>
+				<img class="weather-image" src="images/search.jpeg">
+			</div>
+		</div>
+		<div class=platform>
+				<div class="platform-content">
+					<h1 ng-controller = "head-controller"><span><img src="images/points.png"> </span>       
+						Platform b/w Farmer and Everyone</h1>
+					<p ng-controller = "para-controller">
+						It is an open-source platform that uses peer-to-peer connectors and usage policies for the secure transfer of yields, products between organizations and farmers. Farmers access and adopt better services and practices to increase their yields and incomes. Organizations(shop keeper) grow business to better serve constituents in a coordinated, cost-effective ecosystem. This peer-to-peer connection allows for decentralized yield and product sharing without having to going through a third party.
+					</p>
+				<button class="explore-button" style="margin-top:40px">
+					Explore now
+				</button>
+				</div>
+				<img class="platform-image" src="images/platform.jpeg">
+		</div>
+		<div class="search">
+			<div class="search-content">
+				<h1><span><img src="images/points.png"> </span>       
+				Training Session Notifier</h1>
+				<p>
+					The Training session mainly focuses on discussing ideas for crop yield with maximum benefits to the Farmers. The experts/organizer will give a detailed explanation on usage of Traditional Farming instead of Modern Farming as an objective to maximize the yield with low fertilizers and low budget. The Training session is conducted exclusively for farmers but the shopkeepers can also participate in the Training Session.
+				</p>
+				<button class="explore-button" style="margin-top:40px">
+				Explore now
+				</button>
+			</div>
+			<img class="search-image" src="images/search.jpeg">
+		</div>
+
+	<div ng-include = "'footer'" style="margin-top:140px"></div>
+	<script src="js/index.js"></script>
+	<script src="js/services.js"></script>
+</body>
+</html>

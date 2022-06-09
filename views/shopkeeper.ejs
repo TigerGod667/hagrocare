@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel = "stylesheet" href="css/main.css">
+	<script src="js/angular.min.js"></script>
+	<title>HAGROCARE |information</title>
+</head>
+<body ng-app = "myApp">
+	<div class="shop" ng-controller="my-controller">
+		<form name = "namer" action="/shopEnd" method = "POST">
+			<input type="hidden" id = "id" name = "inputer"/>
+			<input type="hidden" id = "id1" name = "quantity"/>
+		<div class="side-cart">
+			<span ng-click = "vanish()">&times;</span>
+			<h1 style="background: #414141; text-align: center; height:80px; padding-top: 17px; color: white;font-family: Bahnschrift; ">CART</h1>
+			<div class = "side-item" ng-repeat = "i in table">
+				<img src="{{i['src']}}" ng-click = "pdtDescrip()">
+				<div class = "side-content">
+					<h1>{{i["crop_name"]}}</h1>
+					<p>{{i["cost"] | costSymbol}}</p>
+					<h2>{{i["quantity"]}} kg</h2>
+				</div>
+			</div>
+			<button style = "margin: 50px 40px 30px 40px" class = "button">VIEW CART</button>
+		</div>
+		<div class="shop-top">
+			<nav id="navbar" class = "navbars">
+				<ul class = "navlist">
+					<img src="images/hagro.png" width="240" height="70">
+					<li><a href="/trainer">TRAINING</a></li>
+					<li><a class = "temp" href = "#" style="color:#ffaa41;">PRODUCTS</a></li>
+					<li><a href="logout">LOGOUT</a></li>
+					<li><img class = "cart" ng-click = "appear()" src="images/cart.png"></li>
+				</ul>
+			</nav>
+			<div style="padding: 200px 0 0 270px">
+				<h1 class = "shop-heading">BOOK ONLINE<br>Fresh Products Available</h1>
+			</div>
+		</div>
+		<div class="grid-box">
+			<div class = "grid-item" ng-repeat = "i in tabler">
+				<figure><img ng-click = "fullDetail($event, i.crop_id)" src="http://localhost:3000/uploaded images/{{i['image']}}"></figure>
+				<h1>{{i["crop_name"]}}</h1>	
+				<p>{{i["cost"] | costSymbol}}</p>
+				<input type="button" ng-click = "dec($event)" value="-" class="button-minus">
+				<input type="number" value="1">
+				<input type="button" ng-click = "inc($event)" value="+" class="button-plus"><br><br>
+				<button class="button ride">Add to Cart</button>
+			</div>
+		</div>
+	</div>
+</form>
+	<div ng-include="'footer.html'"></div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+	let app = angular.module("myApp", []);
+
+app.filter("costSymbol", function(){
+	return function(input){
+		return "₹" + input
+	}
+});
+
+app.factory('quantity', function() {
+        var randomObject = {};
+        randomObject.increment = function(e, l) {
+            let div_name = e.currentTarget.parentNode;
+			div_name.children[4].value = parseInt(div_name.children[4].value) + 1 
+        };
+        randomObject.decrement = function(e) {
+        	let div_name = e.currentTarget.parentNode;
+			if (div_name.children[4].value != 0){
+			div_name.children[4].value = parseInt(div_name.children[4].value) - 1 	
+			}
+        };
+        return randomObject;
+    });
+
+app.service('sideAppear', function(){
+	this.app = function(){
+		let cart = document.querySelector(".side-cart");
+		cart.style.width = "26.9%";
+	}
+	this.disapp = function(){
+		let cart = document.querySelector(".side-cart");
+		cart.style.width = 0;
+	}
+});
+
+app.controller("my-controller", function($scope, quantity, sideAppear){
+	$scope.inc = function(e){
+		quantity.increment(e);
+	}
+	$scope.dec = function(e){
+		quantity.decrement(e);	
+	}
+	$scope.vanish = function(e){
+		sideAppear.disapp();
+	}
+	$scope.appear = function(e){
+		sideAppear.app();
+	}
+	$scope.tabler = JSON.parse('<%- JSON.stringify(result) %>');
+	$scope.table = [
+		{
+			"src": "images/onion.jpeg",
+			"crop_name": "Onion",
+			"quantity": 5,
+			"cost": 400
+		},
+		{
+			"src" : "images/potato.jpeg",
+			"crop_name": "Potato",
+			"quantity": 4,
+			"cost": 500
+		},
+		{
+			"src" : "images/tomato.jpeg",
+			"crop_name": "Tomato",
+			"quantity": 3,
+			"cost": 300
+		},
+		{
+			"src" : "images/brinjal	.jpeg",
+			"crop_name": "Brinjal",
+			"quantity": 2,
+			"cost": 600
+		},
+	];
+	$scope.fullDetail = (e, crop_id) => {
+		let div = e.currentTarget.parentNode.parentNode;
+		document.querySelector("#id").value = crop_id;
+		document.querySelector("#id1").value = div.children[4].value;
+		console.log(document.querySelector("#id").value);
+		console.log(document.querySelector("#id1").value);
+		namer.submit();
+		// let post = async () => {
+		// 	const options = {
+		// 		method: 'POST',
+		// 		body:  "$" + crop_id + "$",
+		// 		headers: {
+		// 			// "Content-Type": "application/json"
+		// 			"Content-Type": "application/x-www-form-urlencoded"
+		// 		}
+		// 	}
+		// 	let res = await fetch('http://localhost:3000/shopEnd', options);		
+		// 	console.log("hii: " + res.text);
+		// }
+		// post();
+
+	}
+});
+</script>
+<script type="text/javascript" src = "js/index.js"></script>
+</body>
+</html>
+
+<!-- INSERT INTO crops(crop_name, fertilizer, soil, disease, date_sown, crop_type, user_id) VALUES ("cabbage", "nitrogen", "loamy soil","egrot", "2002-03-04", "kharif", 2); -->

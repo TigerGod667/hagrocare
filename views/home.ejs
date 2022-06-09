@@ -1,0 +1,40 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>HAGROCARE |home page</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/main.css">
+     <script src="js/angular.min.js"></script>
+     </head>
+<body ng-app = "" ng-init="name='vicky'">
+	<div class="home">
+		<nav id="navbar" class = "navbars">
+			<ul class = "navlist">
+				<img src="images/hagro.png" width="240" height="70">
+				<li><a href="home" style="color:#ffaa41">HOME</a></li>
+				<li><a href="about">ABOUT</a></li>
+				<li><a href="aboutustamil">பற்றி</a></li>
+				<li><a href="services">SERVICES</a></li>
+				<li><a href="contact">CONTACT</a></li>
+				<% if (session) { %>
+					<li><a href="logout">LOGOUT</a></li>
+				<% }else{ %>
+					<li><a href="login">LOGIN</a></li>
+				<% } %>
+			</ul>
+		</nav>
+		<video class="home-video" src = "images/Pexels Videos 1620050.mp4" muted loop autoplay></video>
+		<div class="overlay">
+		</div>
+		<div class="home-content">
+			<h1 id="head">LET US HELP YOU IN TRADITIONAL FARMING</h1>
+		  	<h2>WELCOME TO HAGROCARE</h2>
+		  	<p>we provide the best care and service for you</p>
+		  	<a href="login" class="button">GET STARTED</a>
+		</div>	
+</div>
+	<div ng-include="'footer'"></div>
+	<script src="js/index.js"></script>
+</body>
+</html>

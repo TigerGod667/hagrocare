@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel = "stylesheet" href="css/main.css">
+	<title>HAGROCARE |Signup</title>
+</head>
+<body>
+	<div class="registration">
+		<nav id="navbar" class = "navbars">
+			<ul class = "navlist">
+				<img src="images/hagro.png" width="240" height="70">
+				<li><a href="home">HOME</a></li>
+				<li><a href="about">ABOUT</a></li>
+				<li><a href="services">SERVICES</a></li>
+				<li><a href="contact">CONTACT</a></li>
+				<li><a href="login" style="color:#ffaa41">LOGIN</a></li>
+			</ul>
+		</nav>
+		<div class="registration-div">
+			<div class="registration-form">
+				<form method = "POST" action="/registration">
+					<fieldset class = "form-group">
+						<legend class = "border-bottom mb4" id="heading-register">Join Today</legend>
+						<div class = "form-group">
+							<label class="form-control-label">Username</label>
+							<input class="form-control form-control-lg" type="text" name="username" required>
+							<% if(typeof alert != 'undefined') { %>
+								<% alert.forEach(function(error){ %>
+									<% if (error.param === "username") { %>
+										<p class = "text-danger" ><%= error.msg %></p>
+									<% } %>
+								<% }); %>
+							<% } %>
+						</div>
+						<!-- <div class = "form-group">
+							<label class="form-control-label">username</label>
+							<% if(typeof alert != 'undefined') { %>
+								<% alert.forEach(function(error){ %>
+									<% if (error.param === "username") { %>
+										<input class="form-control form-control-lg is-invalid" type="text" name="username" required>
+										<p class = "text-danger" ><%= error.msg %></p>
+										<% return %>
+									<% } else { %>
+										<input class="form-control form-control-lg" type="text" name="username" required>
+									<% } %>
+								<% }); %>
+							<% } else { %>
+								<input class="form-control form-control-lg" type="text" name="username" required>
+							<% } %>
+						</div> -->
+						<!-- <div class = "form-group">
+							<label class="form-control-label">Email</label>
+							<% if(typeof alert != 'undefined') { %>
+								<% alert.forEach(function(error) {%>
+									<% if (error.param === "email") {%>
+										<input class="form-control form-control-lg is-invalid" type="text" name="email" required>
+										<p class = "text-danger" ><%= error.msg %></p>
+									<% } else { %>
+										<input class="form-control form-control-lg" type="text" name="email" required>
+									<% } %>
+								<% }); %>
+							<% } else { %>
+								<input class="form-control form-control-lg" type="text" name="email" required>
+							<% } %>
+						</div> -->
+						<div class = "form-group">
+							<label class="form-control-label">Email</label>
+							<input class="form-control form-control-lg" type="text" name="email" required>
+							<% if(typeof alert != 'undefined') { %>
+								<% alert.forEach(function(error) { %>
+									<% if (error.param === "email"){ %>
+										<p class = "text-danger" ><%= error.msg %></p>
+									<% } %>
+								<% }); %>
+							<% } %>
+						</div>
+						<div class = "form-group">
+							<label class="form-control-label">Password</label>
+							<input class="form-control form-control-lg" type="password" name="password" required>
+							<% if(typeof alert != 'undefined') { %>
+								<% alert.forEach(function(error) { %>
+									<% if (error.param === "password"){ %>
+										<p class = "text-danger" ><%= error.msg %></p>
+									<% } %>
+								<% }); %>
+							<% } %>
+						</div>
+						<div class = "form-group">
+							<label class="form-control-label">Confirm Password</label>
+							<input class="form-control form-control-lg" type="password" name="confirm_password" required>
+							<% if(typeof alert != 'undefined') { %>
+								<% alert.forEach(function(error) { %>
+									<% if (error.param === "confirm_password"){ %>
+										<p class = "text-danger" ><%= error.msg %></p>
+									<% } %>
+								<% }); %>
+							<% } %>
+						</div>
+						<div class="form-group">
+							<div style="display: flex; justify-content: space-around;">
+								<div>
+									<input type="radio" name = "role" value = "farmer">
+									<label class="form-control-label">Farmer</label>
+								</div>
+								<div >
+									<input type="radio" name = "role" value = "shopkeeper">
+									<label class="form-control-label">Customer</label>
+								</div>
+								</div>
+							</div>
+						<button class="signup-button" name=signup-submit>
+							Signup
+						</button>
+						<small class="muted-register" style="color:grey;float:right;margin-top:30px">
+							Already have an account <a class = "ml-2" href = "/login">Sign In</a>
+					</small>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src = "js/registration.js"></script>
+</body>
+</html>
